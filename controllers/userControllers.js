@@ -61,10 +61,3 @@ exports.login = async (req, res) => {
 	}
 }
 
-exports.readme=async (req,res,next)=>{
-  try{
-
-  }catch(e)
-{
-return res.status(500 )
-}}

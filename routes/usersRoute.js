@@ -1,12 +1,31 @@
-const express=require("express")
-const router=express.Router()
-const usersController=require("../controllers/usersControllers")
-const authorization=require("../middlewares/authorization")
+const express = require("express");
+const router = express.Router();
+const userController = require("../controllers/usersControllers");
+const authorization = require("../middlewares/authorization");
 
-router.get("/me", authorization.verifyToken, usersController.getDetailUser)
-router.get("/all", authorization.verifyToken, authorization.verifyAdmin, usersController.getAllUser)
+// router.get("/me", authorization.verifyToken, userController.getDetailUser);
+router.get("/me", userController.getDetailUser);
 
-router.put("/:id/update", authorization.verifyToken, authorization.userUpdateDeleteAuthorize)
-router.delete("/:id/delete", authorization.verifyToken, authorization.userUpdateDeleteAuthorize)
+// router.get('/all', authorization.verifyToken, authorization.verifyAdmin, userController.getAllUser)
+// router.get("/all", authorization.verifyToken, userController.getAllUser);
+router.get("/all", userController.getAllUser);
 
-module.exports=router
+router.put(
+  "/:id/update",
+  authorization.verifyToken,
+  authorization.userUpdateDeleteAuthorize,
+  userController.updateUser
+);
+// router.delete(
+//   "/:id/delete",
+//   authorization.verifyToken,
+//   authorization.userUpdateDeleteAuthorize,
+//   userController.deleteUser
+// );
+
+router.delete(
+  "/:id/delete",
+
+  userController.deleteUser
+);
+module.exports = router;
